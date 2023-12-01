@@ -1,0 +1,23 @@
+.App {
+    font-family: sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.square {
+  width: 25px;
+  height: 25px;
+}
+
+.board-row {
+  height: 25px;
+  display: flex;
+  flex-direction: row;
+  
+}
+
+.board {
+  width: 75px;
+  height: 75px;
+}
