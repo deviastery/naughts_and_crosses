@@ -1,28 +1,49 @@
 import "./styles.css";
 import {useState} from 'react';
 
-function Square({value, onSquareClick}) {
+function Square({squareClassName = 'square', value, onSquareClick}) {
   return (
-    <button className='square' onClick={onSquareClick}>
+    <button className={squareClassName} onClick={onSquareClick}>
       {value}
     </button>
   );
 }
 
 function Board({xIsNext, squares, onPlay}) {
+  
+  const [squareClassName, setSquareClassName] = useState(
+    Array(9).fill('square')
+  );
+
+  let nextSquareClassName = Array(9).fill('square');
+  const winner = calculateWinner(squares, nextSquareClassName);
+
+
   function handleClick(i) {
-    if (calculateWinner(squares) || squares[i]) {
+    if(winner) {
+      updateSquareClassName();
+    }
+
+    if (calculateWinner(squares, nextSquareClassName) || squares[i]) {
       return;
     }
+
     const nextSquares = squares.slice();
     nextSquares[i] = xIsNext ? "X" : "O";
     onPlay(nextSquares);
+    
   }
 
-  const winner = calculateWinner(squares);
+  function updateSquareClassName() {
+    calculateWinner(squares, nextSquareClassName);
+    setSquareClassName(nextSquareClassName);
+  }
+
+
+  
   let status;
 
-  if (winner) {
+  if (winner) {    
     status = 'Winner: ' + winner ;
   } else {
     for (let square of squares) {
@@ -42,42 +63,51 @@ function Board({xIsNext, squares, onPlay}) {
       <div className='board'>
         <div className='board-row'>
           <Square 
+            squareClassName={squareClassName[0]}
             value={squares[0]}
             onSquareClick={() => handleClick(0)} 
           />
           <Square 
+            squareClassName={squareClassName[1]}
             value={squares[1]}
             onSquareClick={() => handleClick(1)} 
           />
           <Square 
+            squareClassName={squareClassName[2]}
             value={squares[2]}
             onSquareClick={() => handleClick(2)} 
           />
         </div>
         <div className='board-row'>
         <Square 
+            squareClassName={squareClassName[3]}
             value={squares[3]}
             onSquareClick={() => handleClick(3)} 
           />
           <Square 
+            squareClassName={squareClassName[4]}
             value={squares[4]}
             onSquareClick={() => handleClick(4)} 
           />
           <Square 
+            squareClassName={squareClassName[5]}
             value={squares[5]}
             onSquareClick={() => handleClick(5)} 
           />
         </div>
         <div className='board-row'>
         <Square 
+            squareClassName={squareClassName[6]}
             value={squares[6]}
             onSquareClick={() => handleClick(6)} 
           />
           <Square 
+            squareClassName={squareClassName[7]}
             value={squares[7]}
             onSquareClick={() => handleClick(7)} 
           />
           <Square 
+            squareClassName={squareClassName[8]}
             value={squares[8]}
             onSquareClick={() => handleClick(8)} 
           />
@@ -140,7 +170,7 @@ export default function Game() {
   )
 }
 
-function calculateWinner(squares) {
+function calculateWinner(squares, className) {
   const lines = [
       [0, 1, 2],
       [3, 4, 5],
@@ -158,6 +188,9 @@ function calculateWinner(squares) {
           squares[a] === squares[b] &&
           squares[a] === squares[c]
       ) {
+          className[a]='win_square';
+          className[b]='win_square';
+          className[c]='win_square';
           return squares[a];
       }
   }

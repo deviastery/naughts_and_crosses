@@ -10,6 +10,12 @@
   height: 25px;
 }
 
+.win_square {
+  width: 25px;
+  height: 25px;
+  background-color: rgb(0, 255, 110);
+}
+
 .board-row {
   height: 25px;
   display: flex;
