@@ -20,10 +20,6 @@ function Board({xIsNext, squares, onPlay}) {
 
 
   function handleClick(i) {
-    if(winner) {
-      updateSquareClassName();
-    }
-
     if (calculateWinner(squares, nextSquareClassName) || squares[i]) {
       return;
     }
@@ -31,19 +27,13 @@ function Board({xIsNext, squares, onPlay}) {
     const nextSquares = squares.slice();
     nextSquares[i] = xIsNext ? "X" : "O";
     onPlay(nextSquares);
-    
   }
 
-  function updateSquareClassName() {
-    calculateWinner(squares, nextSquareClassName);
-    setSquareClassName(nextSquareClassName);
-  }
-
-
-  
   let status;
 
-  if (winner) {    
+  if (winner) {  
+    if (squareClassName.every((val) => val === 'square'))
+      setSquareClassName(nextSquareClassName);  
     status = 'Winner: ' + winner ;
   } else {
     for (let square of squares) {
