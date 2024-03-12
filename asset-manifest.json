@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/static/css/main.a36b1171.css",
-    "main.js": "/static/js/main.e63a7a4d.js",
-    "index.html": "/index.html",
-    "main.a36b1171.css.map": "/static/css/main.a36b1171.css.map",
-    "main.e63a7a4d.js.map": "/static/js/main.e63a7a4d.js.map"
+    "main.css": "/naughts_and_crosses/static/css/main.a36b1171.css",
+    "main.js": "/naughts_and_crosses/static/js/main.e63a7a4d.js",
+    "index.html": "/naughts_and_crosses/index.html",
+    "main.a36b1171.css.map": "/naughts_and_crosses/static/css/main.a36b1171.css.map",
+    "main.e63a7a4d.js.map": "/naughts_and_crosses/static/js/main.e63a7a4d.js.map"
   },
   "entrypoints": [
     "static/css/main.a36b1171.css",
